@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,10 +7,11 @@ using UnityEngine.UI;
 public class Chronometer : MonoBehaviour
 {
     private bool timeractive = false;
-    private float currentTime = 0f;
+    private EventParamFloat currentTime = new EventParamFloat
+    {
+        Value = 0
+    };
 
-    [SerializeField]
-    private Text currentTimeText;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,9 +25,10 @@ public class Chronometer : MonoBehaviour
     {
         if (timeractive)
         {
-            currentTime += Time.deltaTime;
+            currentTime.Value += Time.deltaTime;
+            EventManager.TriggerEvent("chronometerTime", currentTime);
         }
-        currentTimeText.text = "Time : " + currentTime.ToString();
+        //currentTimeText.text = "Time : " + currentTime.ToString();
     }
 
     public void StartTimer(EventParam e)
@@ -41,6 +44,7 @@ public class Chronometer : MonoBehaviour
     public void ResetTimer(EventParam e)
     {
         timeractive = false;
-        currentTime = 0f;
+        currentTime.Value = 0f;
+        EventManager.TriggerEvent("chronometerTime", currentTime);
     }
 }

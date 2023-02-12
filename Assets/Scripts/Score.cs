@@ -1,4 +1,7 @@
 public class Score
 {
-    public static int count = 0;
+    public static EventParamInt count = new EventParamInt
+    {
+        Value = 0
+    };
 }

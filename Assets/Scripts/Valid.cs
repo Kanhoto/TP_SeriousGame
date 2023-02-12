@@ -14,8 +14,9 @@ public class Valid : MonoBehaviour
         {
             if (collision.gameObject.GetComponent<WheelProp>().getCorrect())
             {
-                ++Score.count;
-                text.text = "Score : " + Score.count.ToString();
+                ++Score.count.Value;
+                //text.text = "Score : " + Score.count.ToString();
+                EventManager.TriggerEvent("updateScoreLabel", Score.count);
             }
         }
     }
@@ -26,8 +27,9 @@ public class Valid : MonoBehaviour
         {
             if (collision.gameObject.GetComponent<WheelProp>().getCorrect())
             {
-                --Score.count;
-                text.text = "Score : " + Score.count.ToString();
+                --Score.count.Value;
+                //text.text = "Score : " + Score.count.ToString();
+                EventManager.TriggerEvent("updateScoreLabel", Score.count);
             }
         }
     }

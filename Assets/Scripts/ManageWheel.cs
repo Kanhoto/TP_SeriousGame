@@ -40,12 +40,14 @@ public class ManageWheel : MonoBehaviour
             }
             started = false;
             TimerManager.ResetTimer();
+            Score.count.Value = 0;
+            EventManager.TriggerEvent("updateScoreLabel", Score.count);
         }
     }
 
     void CompleteGoal()
     {
-        if (Score.count == 10)
+        if (Score.count.Value == 10)
         {
             TimerManager.StopTimer();
         }
